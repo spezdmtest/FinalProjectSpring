@@ -15,8 +15,14 @@ public class  UserServiceImpl implements UserService{
     private UserRepository repository;
     private PasswordEncoder passwordEncoder;
 
+   @Autowired
+   public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Autowired
-    private void setRepository(UserRepository repository) {
+    public void setRepository(UserRepository repository) {
         this.repository = repository;
     }
 

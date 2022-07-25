@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.griddynamics.finalprojectspring.dto.CartDTO;
 import com.griddynamics.finalprojectspring.dto.ProductDTO;
 import com.griddynamics.finalprojectspring.services.ProductService;
+
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
@@ -26,7 +28,6 @@ public class ProductRestController {
     @GetMapping(path = "/list", produces = "application/json")
     public List<ProductDTO> getAll() {return productService.getAll();}
 
-
     @PostMapping(consumes = "application/json")
     public void addProductInCart(@RequestBody ProductDTO product, Principal principal) {
         productService.addToUserCart(product.getId(), principal.getName());
@@ -39,8 +40,8 @@ public class ProductRestController {
 
     @GetMapping(path = "/{id}/{quantity}/cart")
     public CartDTO Cart(@PathVariable Long id,
-                     @PathVariable BigDecimal quantity,
-                     Principal principal) {
+                        @PathVariable BigDecimal quantity,
+                        Principal principal) {
         return productService.updateToUserCart(id, quantity, principal.getName());
     }
 }
